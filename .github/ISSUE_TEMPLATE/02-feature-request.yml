@@ -1,0 +1,65 @@
+name: Feature request
+description: Suggest a new feature or a change to existing behavior.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion! Describing the problem before any solution makes it much easier to find the right fix.
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Before you start
+      options:
+        - label: I searched existing issues, including closed ones, and this hasn't been suggested yet.
+          required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem are you trying to solve, and who does it affect? Describe your use case rather than a solution.
+      placeholder: When I ..., I have to ..., because ...
+    validations:
+      required: true
+      min_length: 30
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: What would you like to happen? Example configuration, API, or output helps.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other solutions or workarounds you've tried, and why they fall short.
+  - type: dropdown
+    id: breaking
+    attributes:
+      label: Would this change existing behavior?
+      options:
+        - "No, it's purely additive"
+        - "Yes, it would be a breaking change"
+        - "I'm not sure"
+    validations:
+      required: true
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: Would you like to contribute this?
+      options:
+        - "Yes, I'd like to open a pull request"
+        - "Maybe, with some guidance"
+        - "No"
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of conduct and AI use
+      options:
+        - label: I agree to follow the [code of conduct](https://github.com/cravingmaker/.github/blob/main/CODE_OF_CONDUCT.md).
+          required: true
+        - label: If I used AI tools to write this request, I reviewed it and stand behind it.
+          required: true

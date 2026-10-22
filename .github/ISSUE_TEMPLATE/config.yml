@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/cravingmaker/.github/blob/main/SECURITY.md
+    about: Report vulnerabilities privately. Never open a public issue for them.
+  - name: Report a conduct concern
+    url: https://github.com/cravingmaker/.github/blob/main/CODE_OF_CONDUCT.md#reporting-concerns
+    about: Raise code of conduct concerns privately with the maintainer.
+  - name: Get help
+    url: https://github.com/cravingmaker/.github/blob/main/SUPPORT.md
+    about: Where to look first, and how to ask a question that gets answered.

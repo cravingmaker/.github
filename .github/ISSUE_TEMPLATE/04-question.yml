@@ -1,0 +1,36 @@
+name: Question
+description: Ask how to use a project, after checking its documentation.
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please check the project's README and the [support guide](https://github.com/cravingmaker/.github/blob/main/SUPPORT.md) first. If something is broken, use the bug report form instead.
+  - type: textarea
+    id: goal
+    attributes:
+      label: What are you trying to do?
+      description: Describe your goal and its context, not just the step you're stuck on.
+    validations:
+      required: true
+      min_length: 30
+  - type: textarea
+    id: attempts
+    attributes:
+      label: What have you tried?
+      description: The configuration or code you used, and what happened.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The version you're using, if relevant.
+      placeholder: "1.2.3"
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of conduct
+      options:
+        - label: I agree to follow the [code of conduct](https://github.com/cravingmaker/.github/blob/main/CODE_OF_CONDUCT.md).
+          required: true

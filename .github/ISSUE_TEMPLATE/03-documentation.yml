@@ -1,0 +1,42 @@
+name: Documentation
+description: Report missing, unclear, or incorrect documentation.
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve the docs. Small fixes, like typos, are also welcome as pull requests.
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: A link to the page, file, or section, such as a README heading.
+      placeholder: https://github.com/cravingmaker/<repository>#section
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of problem is it?
+      options:
+        - Incorrect or outdated
+        - Unclear or confusing
+        - Missing information
+        - Typo or formatting
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What's wrong or missing, and what should the docs say instead?
+    validations:
+      required: true
+      min_length: 20
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of conduct
+      options:
+        - label: I agree to follow the [code of conduct](https://github.com/cravingmaker/.github/blob/main/CODE_OF_CONDUCT.md).
+          required: true

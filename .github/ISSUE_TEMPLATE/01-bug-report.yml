@@ -1,0 +1,101 @@
+name: Bug report
+description: Report something that doesn't work as documented.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. A minimal reproduction is the fastest way to get it fixed.
+
+        **Don't report security vulnerabilities here.** Follow the [security policy](https://github.com/cravingmaker/.github/blob/main/SECURITY.md) instead.
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Before you start
+      options:
+        - label: I searched existing issues, including closed ones, and this hasn't been reported yet.
+          required: true
+        - label: I can reproduce this with the latest version.
+          required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The version you're using. For npm packages, `npm ls <package-name>` shows it.
+      placeholder: "1.2.3"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the bug and what you expected to happen instead.
+    validations:
+      required: true
+      min_length: 30
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: |
+        The smallest configuration, code, or repository that shows the problem, with exact steps.
+        A link to a minimal repository or gist is ideal.
+      placeholder: |
+        1. Install ...
+        2. Use this configuration ...
+        3. Run ...
+        4. See the error
+    validations:
+      required: true
+      min_length: 30
+  - type: textarea
+    id: output
+    attributes:
+      label: Relevant output
+      description: Error messages, logs, or command output. It's formatted as code automatically, so you don't need backticks.
+      render: shell
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, runtime, package manager, and versions of related tools.
+      placeholder: |
+        OS: macOS 26
+        Node.js: 24.x
+        npm: 11.x
+        Related tools: ESLint 9.x
+    validations:
+      required: true
+  - type: dropdown
+    id: regression
+    attributes:
+      label: Did this work in an earlier version?
+      options:
+        - "Yes, this is a regression"
+        - "No, it has never worked"
+        - "I don't know"
+    validations:
+      required: true
+  - type: input
+    id: last-working-version
+    attributes:
+      label: Last working version
+      description: If this is a regression, the last version where it worked.
+      placeholder: "1.2.2"
+  - type: upload
+    id: attachments
+    attributes:
+      label: Attachments
+      description: Optional. Screenshots, recordings, or a zipped minimal reproduction.
+    validations:
+      required: false
+      accept: ".png,.jpg,.jpeg,.gif,.webp,.mp4,.mov,.webm,.zip,.gz,.tar.gz,.log,.txt,.json"
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of conduct and AI use
+      options:
+        - label: I agree to follow the [code of conduct](https://github.com/cravingmaker/.github/blob/main/CODE_OF_CONDUCT.md).
+          required: true
+        - label: If I used AI tools to write this report, I reviewed it and verified every detail.
+          required: true
