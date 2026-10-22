@@ -398,7 +398,7 @@ github: [cravingmaker]
 - **`id`:** must be unique and contain only letters, numbers, `-`, and `_`. It's also the key for pre-filling a field through URL query parameters.
 - **`textarea.render: <language>`:** formats the answer as a code block, which turns off attachments for that field.
 - **`dropdown`:** supports `multiple` and `default` (an index). If you set a default, don't include "None" or "n/a" as options.
-- **`upload` limits:** images (`.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`, `.webp`) up to 10 MB; videos (`.mp4`, `.mov`, `.webm`) up to 100 MB; archives (`.zip`, `.gz`, `.tar.gz`), documents (`.pdf`, `.docx`, `.xlsx`, `.pptx`), and text (`.json`, `.py`, `.js`, `.ts`, `.log`, `.txt`, `.csv`) up to 25 MB.
+- **`upload` limits:** images (`.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`, `.webp`) up to 10 MB; videos (`.mp4`, `.mov`, `.webm`) up to 100 MB; archives (`.zip`, `.gz`, `.tar.gz`), documents (`.pdf`, `.docx`, `.xlsx`, `.pptx`), and text (`.json`, `.py`, `.js`, `.ts`, `.log`, `.txt`, `.csv`) up to 25 MB. Although the docs list `.tar.gz`, GitHub's validator rejects it in `accept` ("contains invalid file extensions"); `.gz` already covers those files.
 
 **Gotchas**
 

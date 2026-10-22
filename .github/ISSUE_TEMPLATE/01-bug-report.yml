@@ -89,7 +89,7 @@ body:
       description: Optional. Screenshots, recordings, or a zipped minimal reproduction.
     validations:
       required: false
-      accept: ".png,.jpg,.jpeg,.gif,.webp,.mp4,.mov,.webm,.zip,.gz,.tar.gz,.log,.txt,.json"
+      accept: ".png,.jpg,.jpeg,.gif,.webp,.mp4,.mov,.webm,.zip,.gz,.log,.txt,.json"
   - type: checkboxes
     id: terms
     attributes:
