@@ -276,7 +276,7 @@ These aren't GitHub features. A tool reads them, so they only matter if you use 
 - **Markdown defaults:** keep them at the **root**, so they're visible when someone browses the repository. Use exactly one location per file. Because `.github/` takes precedence, a stray copy there would silently shadow the root copy.
 - **Fixed locations:** `.github/ISSUE_TEMPLATE/`, `.github/DISCUSSION_TEMPLATE/`, `.github/FUNDING.yml`, and `.github/VULNERABILITY_REPORT.yml` must live where stated.
 - **The repository's own `README.md`:** explain what the repository is and which defaults it provides. It isn't a profile page. Don't put a `README.md` in `.github/`, because it would replace the root README on this repository's page.
-- **A `LICENSE` for this repository's own content:** worth adding. It isn't inherited and covers only this repository. If you adapt the Contributor Covenant (licensed CC BY 4.0), keep its attribution.
+- **A `LICENSE` for this repository's own content:** worth adding. It isn't inherited and covers only this repository. If you adapt Contributor Covenant 3.0, which is licensed CC BY-SA 4.0, keep its attribution and license the adapted file under CC BY-SA 4.0 too.
 
 ---
 
@@ -903,7 +903,7 @@ Script injection, wrong and right:
 
 **D9. Where should the Markdown defaults sit inside the `.github` repository?** At the root (visible), in `.github/` (tidier root), or in `docs/`. **Recommendation:** the root, with one copy per file.
 
-**D10. Should the `.github` repository have its own license?** **Recommendation:** yes. Use the same license as your projects, or CC BY 4.0 for prose, and keep the Contributor Covenant attribution if you adapt it.
+**D10. Should the `.github` repository have its own license?** **Recommendation:** yes. Use the same license as your projects, or CC BY 4.0 for prose. A file adapted from Contributor Covenant 3.0 must keep its attribution and stay under CC BY-SA 4.0.
 
 ### 6.2 Where should a file live? (decision tree)
 
