@@ -10,7 +10,7 @@ A research report and decision guide.
 | **Labels** | **(preview)** means GitHub marks the feature as public preview, so details may change. |
 
 > [!NOTE]
-> GitHub doesn't read this guide, so it won't affect anything when this directory becomes the `.github` repository. That repository must be public, though. Move or delete this file before you publish if you don't want it visible.
+> This guide records the research and decisions behind this repository. GitHub doesn't read it, so it has no effect on other repositories.
 
 **How to use this guide:** read the [TL;DR](#tldr) and the [decision guide](#6-decision-guide) to make your choices. Use the [file-by-file reference](#4-file-by-file-reference) while you implement, and go through the [best practices](#5-best-practices) before going live.
 
@@ -871,7 +871,7 @@ Script injection, wrong and right:
 
 - `true`: an escape hatch for reports that don't fit a generic form.
 - `false`: everyone must use a form, though Write+ users still see "Blank issue (Maintainers only)".
-- **Recommendation:** `true` in the account-wide default, because generic forms can't fit every repository. Set `false` in repositories where you've built tailored forms.
+- **Recommendation:** `false` once the default forms cover bugs, features, documentation, and questions, which is the setup this repository uses. With only one or two generic forms, keep `true` as an escape hatch.
 
 **D5. How should people report vulnerabilities?**
 
