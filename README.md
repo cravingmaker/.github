@@ -17,6 +17,7 @@ A repository's own file always takes precedence.
 | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE)                     | Issue forms and the template chooser settings              |
 | [`.github/pull_request_template.md`](.github/pull_request_template.md)  | Default pull request description                           |
 | [`.github/VULNERABILITY_REPORT.yml`](.github/VULNERABILITY_REPORT.yml)  | Form for private vulnerability reports                     |
+| [`.github/FUNDING.yml`](.github/FUNDING.yml)                            | Sponsor button that links to GitHub Sponsors               |
 
 ## How it works
 
