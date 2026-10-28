@@ -2,14 +2,15 @@
 
 A research report and decision guide.
 
-| | |
-|---|---|
+|  |  |
+| --- | --- |
 | **Snapshot date** | 2026-10-22 |
 | **Verified against** | docs.github.com (fetched 2026-10-22) and the GitHub Changelog. See [Sources](#9-sources). |
 | **Written for** | `cravingmaker`, a **personal** GitHub account. Differences for organizations and enterprises are called out where they matter. |
 | **Labels** | **(preview)** means GitHub marks the feature as public preview, so details may change. |
 
 > [!NOTE]
+>
 > This guide records the research and decisions behind this repository. GitHub doesn't read it, so it has no effect on other repositories.
 
 **How to use this guide:** read the [TL;DR](#tldr) and the [decision guide](#6-decision-guide) to make your choices. Use the [file-by-file reference](#4-file-by-file-reference) while you implement, and go through the [best practices](#5-best-practices) before going live.
@@ -19,10 +20,10 @@ A research report and decision guide.
 ## TL;DR
 
 1. **Two different things share the name.** The `.github/` **folder** inside any repository holds that repository's configuration: workflows, templates, `CODEOWNERS`, Dependabot, Copilot files, and so on. The `.github` **repository** is a repo literally named `.github`, owned by a user or an organization. It provides **account-wide defaults**, plus a few features that only organizations get.
-2. **The `.github` repository must be public.** Its defaults apply to every repository the account owns, public *and* private, that doesn't have its own file of that type.
+2. **The `.github` repository must be public.** Its defaults apply to every repository the account owns, public _and_ private, that doesn't have its own file of that type.
 3. **Only a fixed list of files is inherited:** `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `SECURITY.md`, `SUPPORT.md`, `ACCESSIBILITY.md`, `FUNDING.yml`, `VULNERABILITY_REPORT.yml`, issue templates and their `config.yml`, pull request templates, and discussion category forms. Nothing else is inherited.
 4. **Not inherited, despite a common belief:** workflows, `dependabot.yml`, `CODEOWNERS`, `release.yml`, `LICENSE`, `README`, Copilot instructions, agents, skills, and hooks. A workflow in the `.github` repository runs only for the `.github` repository.
-5. **Inheritance works per file type, except for issue templates.** If a repository has *anything* valid in its own `.github/ISSUE_TEMPLATE/` folder, even just a `config.yml`, it gets *none* of the default templates.
+5. **Inheritance works per file type, except for issue templates.** If a repository has _anything_ valid in its own `.github/ISSUE_TEMPLATE/` folder, even just a `config.yml`, it gets _none_ of the default templates.
 6. **Defaults are virtual.** They don't appear in other repositories' file browsers, history, clones, downloads, or packages. That's also why a `LICENSE` can't be a default.
 7. **Watch the doubled path.** Inside the `.github` repository, templates live in `.github/ISSUE_TEMPLATE/`, so from your parent folder the path is `Public/.github/.github/ISSUE_TEMPLATE/`. `FUNDING.yml` and `VULNERABILITY_REPORT.yml` must also sit in that inner `.github/` folder. The Markdown defaults can sit at the repository root.
 8. **Personal accounts get less.** A personal account's `.github` repository only provides community-health defaults. The org profile README (`profile/README.md`), workflow templates (`workflow-templates/`), org-wide Copilot agents (`agents/`), and the member-only README (`.github-private`) are organization features. Your personal profile README lives in `cravingmaker/cravingmaker`.
@@ -60,7 +61,7 @@ Files fall into three placement groups:
 GitHub also reads different files from different branches:
 
 | Read from | Files |
-|---|---|
+| --- | --- |
 | The default branch | Issue, PR, and discussion templates; `FUNDING.yml`; `dependabot.yml`; `CITATION.cff`; Copilot hooks; `copilot-setup-steps.yml` |
 | The pull request's **base** branch | `CODEOWNERS` (each branch can have its own) |
 | The pull request's **head** branch | The custom instructions, agent instructions, and skills used by Copilot code review |
@@ -78,7 +79,7 @@ Apart from that, it's an ordinary repository. Its own `.github/` folder configur
 ### 1.3 Related special repositories
 
 | Repository | Account type | Visibility | Purpose |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `USERNAME/USERNAME` | Personal | Public | Your **profile README** (`README.md` at the root). This is not the `.github` repository. |
 | `OWNER/.github` | Personal or organization | Public (required) | Account-wide defaults. For organizations, it also holds the public profile README, workflow templates, and org custom agents. |
 | `ORG/.github-private` | Organization | Private | The member-only org profile README (`profile/README.md`) and org custom agents (`agents/`). |
@@ -124,7 +125,7 @@ The last column answers: "If I put this in the `.github` repository, do my other
 ### 2.1 Community health and project documents
 
 | File | Where it can live | What GitHub does with it | Inherited? |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `README.md` | `.github/` → root → `docs/` | Repository landing page. Content beyond 500 KiB is truncated. | No |
 | `CONTRIBUTING.md` | `.github/` → root → `docs/` | Linked when someone opens an issue or PR. Adds a "Contributing" sidebar link and appears on the `/contribute` page. | **Yes** |
 | `CODE_OF_CONDUCT.md` | `.github/` → root → `docs/` | Sidebar link and community profile entry. | **Yes** |
@@ -139,7 +140,7 @@ The last column answers: "If I put this in the `.github` repository, do my other
 ### 2.2 Issues, pull requests, and discussions
 
 | File | Purpose | Inherited? |
-|---|---|---|
+| --- | --- | --- |
 | `.github/ISSUE_TEMPLATE/*.md` | Markdown issue templates, with YAML front matter (`name`, `about`, `title`, `labels`, `assignees`, `type`) | **Yes**, but all-or-nothing per folder |
 | `.github/ISSUE_TEMPLATE/*.yml` | Issue forms with web form fields **(preview)** | **Yes** |
 | `.github/ISSUE_TEMPLATE/config.yml` | Template chooser settings: `blank_issues_enabled` and `contact_links` | **Yes** |
@@ -150,7 +151,7 @@ The last column answers: "If I put this in the `.github` repository, do my other
 ### 2.3 Security and supply chain
 
 | File | Purpose | Inherited? |
-|---|---|---|
+| --- | --- | --- |
 | `.github/VULNERABILITY_REPORT.yml` (or `.yaml`) | A custom form for private vulnerability reports (new on 2026-10-01) | **Yes**, but a repository's own file wins |
 | `.github/dependabot.yml` (or `.yaml`) | Dependabot version updates, plus customization of security update PRs | No |
 | `.github/secret_scanning.yml` | `paths-ignore`, which closes secret-scanning alerts for matching paths and excludes them from push protection | No |
@@ -160,14 +161,14 @@ The last column answers: "If I put this in the `.github` repository, do my other
 ### 2.4 Ownership, review, and releases
 
 | File | Purpose | Inherited? |
-|---|---|---|
+| --- | --- | --- |
 | `CODEOWNERS` | Automatic review requests and code-owner approvals. Lives in `.github/` → root → `docs/` (first found wins), is read per branch, and must be under 3 MB. | No |
 | `.github/release.yml` | Categories and exclusions for automatically generated release notes | No |
 
 ### 2.5 GitHub Actions
 
 | File | Purpose | Inherited? |
-|---|---|---|
+| --- | --- | --- |
 | `.github/workflows/*.yml` / `*.yaml` | Workflows, including reusable workflows. They must sit directly in this folder; subfolders aren't supported. | No. A workflow runs only in the repository that contains it. |
 | `.github/actions/<name>/action.yml` | A **convention** (not a requirement) for storing local actions | No |
 | `workflow-templates/*.yml` + `*.properties.json` (+ optional `*.svg`), at the root of the `.github` repository | Organization workflow templates, shown in the "New workflow" picker | Organization-only feature |
@@ -178,7 +179,7 @@ The last column answers: "If I put this in the `.github` repository, do my other
 ### 2.6 Copilot and AI agents
 
 | File | Purpose | Inherited? |
-|---|---|---|
+| --- | --- | --- |
 | `.github/copilot-instructions.md` | Repository-wide custom instructions | No. Organizations set org-wide instructions in settings. |
 | `.github/instructions/**/*.instructions.md` | Path-specific instructions, using `applyTo` and `excludeAgent` | No |
 | `AGENTS.md` (anywhere; the nearest one wins), `CLAUDE.md` or `GEMINI.md` (root) | Agent instructions | No |
@@ -201,16 +202,16 @@ These are easy to confuse with `.github/` files:
 
 These aren't GitHub features. A tool reads them, so they only matter if you use that tool:
 
-| Path | Tool |
-|---|---|
-| `.github/labeler.yml` | `actions/labeler` (its default configuration path) |
-| `.github/release-drafter.yml` | Release Drafter |
-| `.github/renovate.json` / `.json5` | Renovate (one of its supported configuration locations) |
-| `.github/settings.yml` | The Probot Settings app (repository settings as code) |
-| `.github/actionlint.yaml` | actionlint |
-| `.github/zizmor.yml` | zizmor (part of its configuration discovery) |
-| `.github/linters/` | Super-Linter |
-| `.github/codeql/codeql-config.yml` | CodeQL advanced setup, passed through the `config-file:` input |
+| Path                                   | Tool                                                                        |
+| -------------------------------------- | --------------------------------------------------------------------------- |
+| `.github/labeler.yml`                  | `actions/labeler` (its default configuration path)                          |
+| `.github/release-drafter.yml`          | Release Drafter                                                             |
+| `.github/renovate.json` / `.json5`     | Renovate (one of its supported configuration locations)                     |
+| `.github/settings.yml`                 | The Probot Settings app (repository settings as code)                       |
+| `.github/actionlint.yaml`              | actionlint                                                                  |
+| `.github/zizmor.yml`                   | zizmor (part of its configuration discovery)                                |
+| `.github/linters/`                     | Super-Linter                                                                |
+| `.github/codeql/codeql-config.yml`     | CodeQL advanced setup, passed through the `config-file:` input              |
 | `.github/dependency-review-config.yml` | `actions/dependency-review-action`, passed through the `config-file:` input |
 
 ---
@@ -229,14 +230,14 @@ These aren't GitHub features. A tool reads them, so they only matter if you use 
 1. For each supported file type, GitHub first looks in the repository itself (`.github/` → root → `docs/`).
 2. If the repository has no file of that type, GitHub uses the `.github` repository's file. It applies the same location order inside the `.github` repository.
 3. The fallback applies **regardless of the destination repository's visibility**: public, private, and internal repositories all receive defaults.
-4. **Issue templates are all-or-nothing.** If a repository defines valid issue templates *or* a `config.yml` in its own `.github/ISSUE_TEMPLATE/` folder, none of the default `ISSUE_TEMPLATE` contents are used. The two sets are never merged.
+4. **Issue templates are all-or-nothing.** If a repository defines valid issue templates _or_ a `config.yml` in its own `.github/ISSUE_TEMPLATE/` folder, none of the default `ISSUE_TEMPLATE` contents are used. The two sets are never merged.
 5. **Defaults are never copied.** They don't appear in other repositories' file browser or history, and they aren't included in clones, packages, or downloads. When you change a default, the change applies at once to every existing and future repository that relies on it.
 6. **A repository's own file always wins.** To opt a repository out of a default, give that repository its own file of the same type.
 
 **Worked example.** Suppose a repository has no `CONTRIBUTING.md`, no `SECURITY.md`, and only a `.github/ISSUE_TEMPLATE/config.yml`:
 
 | File type | What visitors see |
-|---|---|
+| --- | --- |
 | `CONTRIBUTING` | The default from `.github` |
 | `SECURITY` | The default from `.github` |
 | Issue templates | **None of the defaults.** The repository's own `config.yml` disables them, so visitors see only "Blank issue" (if enabled) and that file's contact links. |
@@ -244,23 +245,23 @@ These aren't GitHub features. A tool reads them, so they only matter if you use 
 ### 3.3 What each account type gets
 
 | Capability | Personal `.github` | Organization `.github` | Organization `.github-private` |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Default community health files | Yes | Yes | No |
 | Profile README | No (use `USERNAME/USERNAME`) | Yes: `profile/README.md`, public view | Yes: `profile/README.md`, member-only view |
 | Workflow templates (`workflow-templates/`) | Documented for organizations only | Yes | Not documented |
 | Copilot custom agents for every repository (`agents/`) | No | Yes **(preview)** | Yes **(preview)** |
 | Source repository for organization-wide Discussions | Not applicable | Any org repository can be the source; `.github` is a common choice | Not applicable |
 
-### 3.4 What it does *not* do
+### 3.4 What it does _not_ do
 
 | Common expectation | Reality | What to do instead |
-|---|---|---|
+| --- | --- | --- |
 | "Workflows in `.github` run for all my repositories." | They run only for the `.github` repository. | Call **reusable workflows** from each repository. Organizations can also use workflow templates and org rulesets that require status checks. |
 | "`dependabot.yml` is inherited." | It isn't. | Add `.github/dependabot.yml` to each repository. Organizations can cover alerts and security updates with security configurations. |
 | "`CODEOWNERS` is inherited." | It isn't. | Add `CODEOWNERS` to each repository. |
 | "I can set a default `LICENSE` or `README`." | Neither is supported. | Add them to each repository. |
 | "Copilot instructions, skills, and hooks are inherited." | They aren't. | Add them to each repository. Personal Copilot instructions (set in your settings) apply only to your own chats. Organizations get org instructions in settings and org agents in `agents/`. |
-| "Templates create the labels they reference." | They don't, and missing labels are skipped. | Create the labels in each repository. Organizations can set default labels for *new* repositories. |
+| "Templates create the labels they reference." | They don't, and missing labels are skipped. | Create the labels in each repository. Organizations can set default labels for _new_ repositories. |
 | "Defaults ship inside clones and packages." | They don't. | Keep a per-repository copy of any file that must ship. |
 | "Files in `.github` can configure repository settings and rulesets." | GitHub has no native feature for this. | Use rulesets (UI or API), or a third-party settings app. |
 | "`release.yml`, `secret_scanning.yml`, and `.github/codeql/` are inherited." | Each works per repository only. | Add them where needed. |
@@ -475,6 +476,7 @@ body:
 
 ```markdown
 <!-- .github/pull_request_template.md  (generic default) -->
+
 ## Summary
 
 <!-- What does this change, and why? Link related issues (e.g. "Closes #123"). -->
@@ -538,7 +540,7 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directories:
-      - "/"                    # .github/workflows/ and a root action.yml
+      - "/" # .github/workflows/ and a root action.yml
       # - "/.github/actions/*" # uncomment if you add local actions
     schedule:
       interval: "weekly"
@@ -565,7 +567,7 @@ changelog:
     - title: Fixes
       labels: ["bug"]
     - title: Dependencies
-      labels: ["dependencies"]   # Dependabot applies this label by default
+      labels: ["dependencies"] # Dependabot applies this label by default
     - title: Other changes
       labels: ["*"]
 ```
@@ -639,9 +641,9 @@ For security hardening, see [5.3](#53-security-hardening-of-github).
 name: Node CI
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [$default-branch]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [$default-branch]
 permissions:
   contents: read
 jobs:
@@ -669,7 +671,7 @@ jobs:
 ### 4.20 Copilot and AI customization files
 
 | File | Read by | Key rules |
-|---|---|---|
+| --- | --- | --- |
 | `.github/copilot-instructions.md` | Copilot Chat, cloud agent, and code review on GitHub.com; IDEs; CLI | Natural-language Markdown. Applies to every request in the repository. Keep it short and stable. |
 | `.github/instructions/**/*.instructions.md` | Cloud agent and code review on GitHub.com; most IDEs; CLI | Front matter `applyTo: "glob,glob"`. Optional `excludeAgent: "code-review"` or `"cloud-agent"`. |
 | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md` | Cloud agent, code review, CLI; VS Code reads `AGENTS.md` | Any number of `AGENTS.md` files, and the nearest one in the tree wins. `CLAUDE.md` and `GEMINI.md` are single files at the root. |
@@ -693,20 +695,23 @@ Minimal examples:
 
 ```markdown
 <!-- .github/instructions/tests.instructions.md -->
+
 ---
-applyTo: "**/*.test.ts"
-excludeAgent: "code-review"
+
+applyTo: "**/*.test.ts" excludeAgent: "code-review"
 ---
+
 Use Vitest. Prefer table-driven tests. Don't add snapshot tests for configuration objects.
 ```
 
 ```markdown
 <!-- .github/agents/docs-writer.agent.md -->
+
 ---
-name: docs-writer
-description: Updates Markdown documentation to match code changes, following the project's style.
-tools: ["read", "search", "edit"]
+
+name: docs-writer description: Updates Markdown documentation to match code changes, following the project's style. tools: ["read", "search", "edit"]
 ---
+
 You are a documentation specialist. Only edit Markdown files. Keep examples runnable.
 ```
 
@@ -714,9 +719,7 @@ You are a documentation specialist. Only edit Markdown files. Keep examples runn
 {
   "version": 1,
   "hooks": {
-    "preToolUse": [
-      { "type": "command", "bash": "./scripts/hooks/check-tool.sh", "timeoutSec": 10 }
-    ]
+    "preToolUse": [{ "type": "command", "bash": "./scripts/hooks/check-tool.sh", "timeoutSec": 10 }]
   }
 }
 ```
@@ -736,7 +739,7 @@ You are a documentation specialist. Only edit Markdown files. Keep examples runn
 ### 5.2 Writing defaults that work in every repository
 
 - **Be generic.** Say "this project", and never name a specific package.
-- **Use absolute links** in defaults that point elsewhere. A relative link in a default file resolves inside the `.github` repository, and template text is copied into issues in *other* repositories.
+- **Use absolute links** in defaults that point elsewhere. A relative link in a default file resolves inside the `.github` repository, and template text is copied into issues in _other_ repositories.
 - **Don't link per-repository pages from defaults.** Write instructions instead: "use **Report a vulnerability** on the repository's **Security** tab."
 - **Use GitHub's default label names** (`bug`, `enhancement`, `documentation`, `question`, and so on) in default templates, so the labels exist almost everywhere.
 - **Remember these limits:** `required` fields are enforced only in public repositories, `type:` needs organization issue types, and `projects:` needs the reporter to have write access.
@@ -765,7 +768,7 @@ You are a documentation specialist. Only edit Markdown files. Keep examples runn
 **Untrusted pull requests**
 
 - Avoid `pull_request_target`. From 2026-11-02, GitHub's default policy blocks it in public repositories that have no explicit event policy.
-- Never check out and *execute* PR code in a privileged workflow, whatever its trigger. The `allow-unsafe-pr-checkout: true` input exists for rare, reviewed exceptions.
+- Never check out and _execute_ PR code in a privileged workflow, whatever its trigger. The `allow-unsafe-pr-checkout: true` input exists for rare, reviewed exceptions.
 - Treat artifacts that a `workflow_run` workflow receives from other runs as untrusted data.
 - Set fork PR approvals to **Require approval for all external contributors**. The first-time-contributor options can be gamed with one trivial merged PR.
 
@@ -795,7 +798,7 @@ on:
   pull_request:
   push:
     branches: [main]
-permissions: {}                      # nothing by default
+permissions: {} # nothing by default
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -804,7 +807,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
-      contents: read                 # grant per job, minimally
+      contents: read # grant per job, minimally
     steps:
       - uses: actions/checkout@<full-length-sha> # vX.Y.Z
         with:
@@ -851,8 +854,8 @@ Script injection, wrong and right:
 
 **D1. Which account owns the `.github` repository: your personal account or an organization?**
 
-- *Personal* (`cravingmaker/.github`): community-health defaults for all your repositories. Simple, and you're the only owner.
-- *Organization:* also gives you an org profile README, workflow templates, teams in `CODEOWNERS`, org rulesets, issue types, default labels, org Discussions, and org-wide Copilot instructions and agents (with a Copilot plan).
+- _Personal_ (`cravingmaker/.github`): community-health defaults for all your repositories. Simple, and you're the only owner.
+- _Organization:_ also gives you an org profile README, workflow templates, teams in `CODEOWNERS`, org rulesets, issue types, default labels, org Discussions, and org-wide Copilot instructions and agents (with a Copilot plan).
 - **The cost of moving repositories into an organization later:**
   - GitHub redirects web and git URLs, but **Actions doesn't follow redirects** for `uses:` references to actions or reusable workflows.
   - Your publish workflows appear to use npm trusted publishing (`id-token: write`, no npm token secret). Trusted publishing is configured against a specific GitHub owner, repository, and workflow file, so each package would need reconfiguring.
@@ -863,9 +866,9 @@ Script injection, wrong and right:
 
 **D3. Should there be default issue templates?**
 
-- *A generic default set* (bug report, feature request, and `config.yml`) for every repository without its own. Repositories that need tailored forms keep a complete set of their own.
-- *No defaults:* each repository decides for itself.
-- **Recommendation:** the generic set. Remember that a repository with *any* template file of its own gets none of the defaults.
+- _A generic default set_ (bug report, feature request, and `config.yml`) for every repository without its own. Repositories that need tailored forms keep a complete set of their own.
+- _No defaults:_ each repository decides for itself.
+- **Recommendation:** the generic set. Remember that a repository with _any_ template file of its own gets none of the defaults.
 
 **D4. Should blank issues be allowed in the default chooser?**
 
@@ -886,9 +889,9 @@ Script injection, wrong and right:
 
 **D7. Where should shared CI live?**
 
-- *(a) Copies in each repository* (what you do today). Simple and independent, and Dependabot updates each copy.
-- *(b) Reusable workflows in `cravingmaker/.github`.* One well-known place, but CI history gets mixed with community documents, and tags version the whole repository.
-- *(c) A dedicated public repository* (for example, `cravingmaker/workflows`). Clean history, independent tags and releases, and its own `CODEOWNERS` and rulesets.
+- _(a) Copies in each repository_ (what you do today). Simple and independent, and Dependabot updates each copy.
+- _(b) Reusable workflows in `cravingmaker/.github`._ One well-known place, but CI history gets mixed with community documents, and tags version the whole repository.
+- _(c) A dedicated public repository_ (for example, `cravingmaker/workflows`). Clean history, independent tags and releases, and its own `CODEOWNERS` and rulesets.
 - **Constraints for (b) and (c):**
   - Reusable workflows must sit directly in `.github/workflows/`.
   - Callers should pin `@<sha>` (Dependabot can bump the pin).
@@ -927,7 +930,7 @@ Script injection, wrong and right:
 ### 6.3 Per-file matrix for cravingmaker
 
 | Item | Recommendation | Reason |
-|---|---|---|
+| --- | --- | --- |
 | `CODE_OF_CONDUCT.md` | **Centralize** (project-neutral wording) | Your two copies differ only by package name. |
 | `SECURITY.md` | **Centralize** a generic policy; override only where a policy really differs | The current differences are repository URLs and tool names, which generic wording replaces. |
 | `.github/VULNERABILITY_REPORT.yml` | **Centralize** | It applies to every public repository with private vulnerability reporting enabled. |
@@ -945,7 +948,7 @@ Script injection, wrong and right:
 ### 6.4 Pitfalls and troubleshooting
 
 | Symptom | Likely cause | Fix |
-|---|---|---|
+| --- | --- | --- |
 | Default issue templates don't appear in a repository | The repository has its own `.github/ISSUE_TEMPLATE/` contents, even just `config.yml` | Remove them, or copy in the full set |
 | A template doesn't appear at all | `name` is 3 characters or fewer, the YAML is invalid, or the file isn't on the default branch | Fix the file and check it in the template editor |
 | Labels aren't applied | The label doesn't exist in the target repository | Create it, or use a default label name |
@@ -967,7 +970,7 @@ Script injection, wrong and right:
 
 ### 7.1 Current state (observed 2026-10-22)
 
-- **Account:** `cravingmaker` is a **personal (User) account** with 13 public repositories. The GitHub API returned *Not Found* for `cravingmaker/.github`, so the repository doesn't exist yet, or at least isn't public.
+- **Account:** `cravingmaker` is a **personal (User) account** with 13 public repositories. The GitHub API returned _Not Found_ for `cravingmaker/.github`, so the repository doesn't exist yet, or at least isn't public.
 - **Local checkouts:** `eslint-config` and `prettier-config` each have:
   - their own `CODE_OF_CONDUCT.md` (identical except for the package name), `CONTRIBUTING.md` (tailored), `SECURITY.md` (repository-specific links), and `LICENSE`;
   - the same `.github/CODEOWNERS` (`* @cravingmaker`);
@@ -1013,7 +1016,7 @@ Optional later additions: `ACCESSIBILITY.md`, `.github/FUNDING.yml`, `.github/DI
 ## 8. Recent changes to watch
 
 | Date | Change | Why it matters here |
-|---|---|---|
+| --- | --- | --- |
 | 2025-08-08 | The Dependabot `reviewers` option was removed | Use `CODEOWNERS` to route Dependabot PRs. |
 | 2026-10-01 | Structured forms for private vulnerability reports | New default-able file: `.github/VULNERABILITY_REPORT.yml`. |
 | 2026-10-14 | Workflow dependency lockfiles **(preview)** | `.github/workflows/actions.lock`, `gh actions-lock`, and a **Require lockfile** policy. |

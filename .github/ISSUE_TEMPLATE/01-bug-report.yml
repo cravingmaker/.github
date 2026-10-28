@@ -38,8 +38,7 @@ body:
     attributes:
       label: Steps to reproduce
       description: |
-        The smallest configuration, code, or repository that shows the problem, with exact steps.
-        A link to a minimal repository or gist is ideal.
+        The smallest configuration, code, or repository that shows the problem, with exact steps. A link to a minimal repository or gist is ideal.
       placeholder: |
         1. Install ...
         2. Use this configuration ...
