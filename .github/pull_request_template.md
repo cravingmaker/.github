@@ -1,9 +1,7 @@
 <!--
-Thanks for contributing! Please read the contributing guide first:
-https://github.com/cravingmaker/.github/blob/main/CONTRIBUTING.md
+Thanks for contributing! Please read the contributing guide first: https://github.com/cravingmaker/.github/blob/main/CONTRIBUTING.md
 
-Title: follow the repository's commit conventions. Most use Conventional
-Commits, for example "fix: handle an empty config" or "feat!: drop Node.js 20".
+Title: follow the repository's commit conventions. Most use Conventional Commits, for example "fix: handle an empty config" or "feat!: drop Node.js 20".
 -->
 
 ## Summary

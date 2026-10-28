@@ -1,8 +1,6 @@
 # Contributing
 
-Thanks for your interest in contributing! This guide applies to every repository
-owned by [@cravingmaker](https://github.com/cravingmaker) that doesn't have its
-own. If a repository has its own contributing guide, follow that instead.
+Thanks for your interest in contributing! This guide applies to every repository owned by [@cravingmaker](https://github.com/cravingmaker) that doesn't have its own. If a repository has its own contributing guide, follow that instead.
 
 ## Ways to contribute
 
@@ -13,11 +11,9 @@ own. If a repository has its own contributing guide, follow that instead.
 
 ## Before you start
 
-- For anything beyond a small fix, open an issue first so we can agree on the
-  approach before you spend time on it.
+- For anything beyond a small fix, open an issue first so we can agree on the approach before you spend time on it.
 - Comment on an issue before you start working on it, to avoid duplicate effort.
-- Check the repository's README for setup instructions and project-specific
-  conventions.
+- Check the repository's README for setup instructions and project-specific conventions.
 
 ## Making changes
 
@@ -29,24 +25,24 @@ own. If a repository has its own contributing guide, follow that instead.
 
 ## Commit messages and pull request titles
 
-Most repositories use [Conventional Commits](https://www.conventionalcommits.org/)
-and squash merging, so the pull request title becomes the commit message. For
-example:
+Most repositories use [Conventional Commits](https://www.conventionalcommits.org/) and squash merging, so the pull request title becomes the commit message. For example:
 
 - `fix: handle an empty configuration file`
 - `feat: add a rule for import ordering`
 - `feat!: drop support for Node.js 20` (the `!` marks a breaking change)
 
-Release tooling uses these titles to choose the next version and to write the
-changelog.
+Release tooling uses these titles to choose the next version and to write the changelog.
+
+## Writing Markdown
+
+Keep each paragraph and list item on one line, and let your editor wrap it on screen. GitHub renders a line break inside a paragraph as a break in issues, pull requests, comments, and release notes, so text that is wrapped by hand shows ragged lines there. With one line per paragraph, the same text works in all of them and in Markdown files.
 
 ## Review process
 
 - Pull requests are reviewed as time allows, usually within a week.
 - Automated checks must pass before a pull request is merged.
 - If you're asked for changes, push them to the same branch.
-- Inactive pull requests may be closed after a while. You're welcome to reopen
-  them later.
+- Inactive pull requests may be closed after a while. You're welcome to reopen them later.
 
 ## AI-assisted contributions
 
@@ -60,13 +56,8 @@ Low-effort or unreviewed AI-generated contributions will be closed.
 
 ## Licensing
 
-By contributing, you agree that your contributions are licensed under the
-license of the repository you contribute to.
+By contributing, you agree that your contributions are licensed under the license of the repository you contribute to.
 
 ## Code of conduct and security
 
-Everyone who takes part must follow the
-[code of conduct](https://github.com/cravingmaker/.github/blob/main/CODE_OF_CONDUCT.md).
-Report security vulnerabilities privately, as described in the
-[security policy](https://github.com/cravingmaker/.github/blob/main/SECURITY.md),
-and never in a public issue or pull request.
+Everyone who takes part must follow the [code of conduct](https://github.com/cravingmaker/.github/blob/main/CODE_OF_CONDUCT.md). Report security vulnerabilities privately, as described in the [security policy](https://github.com/cravingmaker/.github/blob/main/SECURITY.md), and never in a public issue or pull request.
